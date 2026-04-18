@@ -36,7 +36,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Unit tests / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -395,7 +395,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Unit tests / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -586,11 +586,9 @@ pyrightconfig.json
 *mies
 
 # Other names that would make sense
-*tests
 *testsdir
 *testsfile
 *testsfiles
-*test
 *testdir
 *testfile
 *testfiles
@@ -610,5 +608,4 @@ pyrightconfig.json
 
 config.py
 allure-results/
-
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,pycharm,test
