@@ -1,11 +1,11 @@
 import allure
 from selenium.webdriver.support import expected_conditions as EC
-from pages.AuthPage import AuthPage
-from pages.MainPage import MainPage
+from pages.ui.AuthPage import AuthPage
+from pages.ui.MainPage import MainPage
 
 @allure.feature("UI")
 @allure.story("Авторизация")
-@allure.title("Авторизация пользователя и проверка профиля")
+@allure.title("Успешный вход в аккаунт")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_auth(browser, ui_credentials):
     auth_page = AuthPage(browser)
@@ -16,6 +16,15 @@ def test_auth(browser, ui_credentials):
     with allure.step("Проверить, что авторизация прошла успешно"):
         assert auth_page.is_logged_in()
 
+@allure.feature("UI")
+@allure.story("Профиль")
+@allure.title("Проверка URL профиля и отображаемого имени")
+@allure.severity(allure.severity_level.NORMAL)
+def test_profile_info(browser, ui_credentials):
+    auth_page = AuthPage(browser)
+    auth_page.go()
+    auth_page.login_as(ui_credentials["email"], ui_credentials["password"])
+    assert auth_page.is_logged_in()
 
     main_page = MainPage(browser)
     with allure.step("Открыть страницу профиля"):

@@ -15,24 +15,22 @@ class AuthPage:
 
     @allure.step("Авторизоваться под {email}:{password}")
     def login_as(self, email: str, password: str):
-        # Ввести email
         email_field = WebDriverWait(self.__driver, 10).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
         )
         email_field.send_keys(email)
 
-        # Ввести пароль
         password_field = WebDriverWait(self.__driver, 10).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input[type='password']"))
         )
         password_field.send_keys(password)
 
-        # Нажать "Войти"
         submit_btn = WebDriverWait(self.__driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Войти')]"))
         )
         submit_btn.click()
 
+    @allure.step("Проверить, что пользователь авторизован")
     def is_logged_in(self) -> bool:
         try:
             WebDriverWait(self.__driver, 10).until(

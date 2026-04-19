@@ -1,4 +1,4 @@
-from api.ProjectsApi import ProjectApi
+from pages.api.ProjectsApi import ProjectApi
 from config import BASE_URL_API
 import allure
 
