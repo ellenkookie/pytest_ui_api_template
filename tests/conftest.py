@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from config import LOGIN, PASSWORD, COMPANY_ID, BASE_URL_API
 from config import UI_LOGIN, UI_PASSWORD
+from pages.api.ProjectsApi import ProjectApi
 
 # ---------- UI фикстуры ----------
 @pytest.fixture(scope="function")
@@ -44,3 +45,10 @@ def auth_headers():
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
     }
+
+
+@pytest.fixture(scope="session")
+def project_id(auth_headers):
+    api = ProjectApi(BASE_URL_API, auth_headers)
+    response = api.create_project("Проект для досок")
+    return response["id"]

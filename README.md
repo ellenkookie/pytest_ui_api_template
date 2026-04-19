@@ -1,21 +1,21 @@
 ## Шаблон для автоматизации тестирования на python
+Данный проект содержит автотесты для UI и API тестирования, написанные с использованием паттерна 
+Page Object Model (POM) и Allure-отчётов.
 
 
 ### Стек:
-- pytest
-- selenium
-- requests
-- _sqlalchemy_
-- allure
-- config
+- **pytest** – фреймворк для написания тестов
+- **selenium** – автоматизация UI
+- **requests** – тестирование API
+- **allure** – генерация отчётов
+- **webdriver-manager** – автоматическое управление драйверами
+- **tenacity** – повторные попытки для нестабильных запросов
 
 
 ### Струткура:
 - ./tests - тесты
 - ./pages - описание страниц
 - ./api - хелперы для работы с API
-- ./db - хелперы для работы с БД
-
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
@@ -30,8 +30,8 @@
 5. Открыть отчет `allure open allure-report`
 
 ### Библиотеки (!)
-- pip install pytest
-- pip install selenium
-- pip install webdriver-manager
-- pip install allure
-- pip install requests
+- pip3 install pytest
+- pip3 install selenium
+- pip3 install webdriver-manager
+- pip3 install allure
+- pip3 install requests
