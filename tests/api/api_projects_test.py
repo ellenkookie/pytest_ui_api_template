@@ -1,7 +1,9 @@
 from pages.api.ProjectsApi import ProjectApi
 from config import BASE_URL_API
 import allure
+import pytest
 
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("Проекты")
 @allure.title("Создание проекта")

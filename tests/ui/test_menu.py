@@ -1,7 +1,9 @@
 import allure
+import pytest
 from pages.ui.AuthPage import AuthPage
 from pages.ui.MenuPage import MenuPage
 
+@pytest.mark.ui
 @allure.feature("UI")
 @allure.story("Меню")
 @allure.title("Проверка отображения разделов меню")

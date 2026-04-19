@@ -2,7 +2,9 @@ import allure
 from selenium.webdriver.support import expected_conditions as EC
 from pages.ui.AuthPage import AuthPage
 from pages.ui.MainPage import MainPage
+import pytest
 
+@pytest.mark.ui
 @allure.feature("UI")
 @allure.story("Авторизация")
 @allure.title("Успешный вход в аккаунт")

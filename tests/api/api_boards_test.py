@@ -1,8 +1,9 @@
 import allure
+import pytest
 from pages.api.BoardApi import BoardApi
 from config import BASE_URL_API
 
-
+@pytest.mark.api
 @allure.feature("API")
 @allure.story("Доски")
 @allure.title("Получение списка досок проекта")

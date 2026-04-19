@@ -8,6 +8,22 @@ from config import LOGIN, PASSWORD, COMPANY_ID, BASE_URL_API
 from config import UI_LOGIN, UI_PASSWORD
 from pages.api.ProjectsApi import ProjectApi
 
+def pytest_addoption(parser):
+    parser.addoption("--run", action="store", default="all", help="'ui', 'api' or 'all'")
+
+def pytest_collection_modifyitems(config, items):
+    run_mode = config.getoption("--run")
+    if run_mode == "ui":
+        skip_api = pytest.mark.skip(reason="Skipping API tests")
+        for item in items:
+            if "api" in item.keywords:
+                item.add_marker(skip_api)
+    elif run_mode == "api":
+        skip_ui = pytest.mark.skip(reason="Skipping UI tests")
+        for item in items:
+            if "ui" in item.keywords:
+                item.add_marker(skip_ui)
+
 # ---------- UI фикстуры ----------
 @pytest.fixture(scope="function")
 def browser():
