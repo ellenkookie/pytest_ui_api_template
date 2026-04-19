@@ -8,31 +8,34 @@ class ProjectApi:
         self.headers = headers
 
     @allure.step("Создать проект с названием '{title}'")
-    def create_project(self, title: str, users: dict = None) -> dict:
+    def create_project(self, title: str, users: dict = None, timeout: int = 30) -> dict:
         payload = {"title": title}
         if users:
             payload["users"] = users
         resp = requests.post(
             f"{self.base_url}/projects",
             json=payload,
-            headers=self.headers
+            headers=self.headers,
+            timeout = timeout
         )
         return resp.json()
 
     @allure.step("Получить проект по ID {project_id}")
-    def get_project(self, project_id: str) -> dict:
+    def get_project(self, project_id: str, timeout: int = 30) -> dict:
         resp = requests.get(
             f"{self.base_url}/projects/{project_id}",
-            headers=self.headers
+            headers=self.headers,
+            timeout=timeout
         )
         return resp.json()
 
     @allure.step("Обновить проект {project_id}: новое название '{new_title}'")
-    def update_project(self, project_id: str, new_title: str) -> dict:
+    def update_project(self, project_id: str, new_title: str, timeout: int = 30) -> dict:
         payload = {"title": new_title}
         resp = requests.put(
             f"{self.base_url}/projects/{project_id}",
             json=payload,
-            headers=self.headers
+            headers=self.headers,
+            timeout=timeout
         )
         return resp.json()
