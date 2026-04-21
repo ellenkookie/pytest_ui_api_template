@@ -2,14 +2,15 @@ import requests
 import allure
 from tenacity import retry, stop_after_attempt, wait_fixed
 
+
 class BoardApi:
-    def __init__(self, base_url: str, headers: dict):
+    def __init__(self, base_url: str, headers: dict) -> None:
         self.base_url = base_url
         self.headers = headers
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))
     @allure.step("Получить список досок")
-    def get_boards(self, project_id: str = None, include_deleted: bool = False, limit: int = 50,
+    def get_boards(self, project_id: str = " ", include_deleted: bool = False, limit: int = 50,
                    offset: int = 0) -> dict:
         params = {
             "includeDeleted": str(include_deleted).lower(),
@@ -28,6 +29,7 @@ class BoardApi:
         return resp.json()
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))
+    @allure.step("Создать доску с названием '{title}' в проекте {project_id}")
     def create_board(self, project_id: str, title: str) -> dict:
         payload = {
                 "title": title,

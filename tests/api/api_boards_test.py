@@ -3,11 +3,12 @@ import pytest
 from pages.api.BoardApi import BoardApi
 from config import BASE_URL_API
 
+
 @pytest.mark.api
 @allure.feature("API")
 @allure.story("Доски")
 @allure.title("Получение списка досок проекта")
-def test_get_boards_list(auth_headers, project_id):
+def test_get_boards_list(auth_headers, project_id) -> None:
     api = BoardApi(BASE_URL_API, auth_headers)
     with allure.step(f"Получить список досок для проекта {project_id}"):
         boards = api.get_boards(project_id=project_id)
@@ -19,7 +20,7 @@ def test_get_boards_list(auth_headers, project_id):
 @allure.story("Доски")
 @allure.title("Создание доски в проекте")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_create_board(auth_headers, project_id):
+def test_create_board(auth_headers, project_id) -> None:
     board_api = BoardApi(BASE_URL_API, auth_headers)
     board_name = "Тестовая доска"
 

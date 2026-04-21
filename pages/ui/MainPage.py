@@ -4,16 +4,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import allure
 
+
 class MainPage:
     def __init__(self, driver: WebDriver) -> None:
         self.__driver = driver
 
     @allure.step("Получить текущий URL")
-    def get_current_url(self):
+    def get_current_url(self) -> str:
         return self.__driver.current_url
 
     @allure.step("Открыть страницу профиля")
-    def open_profile(self):
+    def open_profile(self) -> None:
         profile_menu = WebDriverWait(self.__driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Мой профиль')]"))
         )

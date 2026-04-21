@@ -1,8 +1,10 @@
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import allure
+
 
 class AuthPage:
     def __init__(self, driver: WebDriver) -> None:
@@ -10,11 +12,11 @@ class AuthPage:
         self.__driver = driver
 
     @allure.step("Перейти на страницу авторизации")
-    def go(self):
+    def go(self) -> None:
         self.__driver.get(self.__url)
 
     @allure.step("Авторизоваться под {email}:{password}")
-    def login_as(self, email: str, password: str):
+    def login_as(self, email: str, password: str) -> None:
         email_field = WebDriverWait(self.__driver, 10).until(
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
         )
@@ -37,5 +39,5 @@ class AuthPage:
                 EC.visibility_of_element_located((By.XPATH, "//div[contains(text(), 'Мой профиль')]"))
             )
             return True
-        except:
+        except TimeoutException:
             return False

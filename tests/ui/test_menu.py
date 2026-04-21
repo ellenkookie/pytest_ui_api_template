@@ -3,13 +3,14 @@ import pytest
 from pages.ui.AuthPage import AuthPage
 from pages.ui.MenuPage import MenuPage
 
+
 @pytest.mark.ui
 @allure.feature("UI")
 @allure.story("Меню")
 @allure.title("Проверка отображения разделов меню")
 @allure.description("Проверяет, что после входа в аккаунт все пункты меню отображаются")
 @allure.severity(allure.severity_level.NORMAL)
-def test_menu_sections_visible(browser, ui_credentials):
+def test_menu_sections_visible(browser, ui_credentials) -> None:
     with allure.step("Авторизация"):
         auth_page = AuthPage(browser)
         auth_page.go()
@@ -21,11 +22,12 @@ def test_menu_sections_visible(browser, ui_credentials):
     with allure.step(f"Проверить наличие разделов: {sections}"):
         assert menu_page.are_menu_sections_visible(sections), "Не все разделы меню отображаются"
 
+
 @allure.feature("UI")
 @allure.story("Профиль")
 @allure.title("Проверка видимости кнопки выхода")
 @allure.severity(allure.severity_level.NORMAL)
-def test_logout_button_visible(browser, ui_credentials):
+def test_logout_button_visible(browser, ui_credentials) -> None:
     with allure.step("Авторизация"):
         auth_page = AuthPage(browser)
         auth_page.go()
@@ -41,7 +43,7 @@ def test_logout_button_visible(browser, ui_credentials):
 @allure.story("Отчеты")
 @allure.title("Проверка количества открытых задач в отчетах")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_open_tasks_count(browser, ui_credentials):
+def test_open_tasks_count(browser, ui_credentials) -> None:
     auth_page = AuthPage(browser)
     with allure.step("Авторизация"):
         auth_page.go()

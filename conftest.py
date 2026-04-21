@@ -8,8 +8,10 @@ from config import LOGIN, PASSWORD, COMPANY_ID, BASE_URL_API
 from config import UI_LOGIN, UI_PASSWORD
 from pages.api.ProjectsApi import ProjectApi
 
+
 def pytest_addoption(parser):
     parser.addoption("--run", action="store", default="all", help="'ui', 'api' or 'all'")
+
 
 def pytest_collection_modifyitems(config, items):
     run_mode = config.getoption("--run")
@@ -23,6 +25,7 @@ def pytest_collection_modifyitems(config, items):
         for item in items:
             if "ui" in item.keywords:
                 item.add_marker(skip_ui)
+
 
 # ---------- UI фикстуры ----------
 @pytest.fixture(scope="function")
@@ -40,6 +43,7 @@ def browser():
 @pytest.fixture
 def ui_credentials():
     return {"email": UI_LOGIN, "password": UI_PASSWORD}
+
 
 # ---------- API фикстуры ----------
 @pytest.fixture(scope="session")

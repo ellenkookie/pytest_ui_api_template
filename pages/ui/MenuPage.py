@@ -1,3 +1,4 @@
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -6,7 +7,7 @@ import allure
 
 
 class MenuPage:
-    def __init__(self, driver: WebDriver):
+    def __init__(self, driver: WebDriver) -> None:
         self.__driver = driver
 
     @allure.step("Проверить, что все разделы меню отображаются")
@@ -16,12 +17,12 @@ class MenuPage:
                 WebDriverWait(self.__driver, 5).until(
                     EC.visibility_of_element_located((By.XPATH, f"//*[contains(text(), '{section}')]"))
                 )
-            except:
+            except TimeoutException:
                 return False
         return True
 
     @allure.step("Открыть страницу профиля")
-    def open_profile(self):
+    def open_profile(self) -> None:
         profile_menu = WebDriverWait(self.__driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Мой профиль')]"))
         )
@@ -34,11 +35,11 @@ class MenuPage:
                 EC.visibility_of_element_located((By.CSS_SELECTOR, "[data-testid='logout-link']"))
             )
             return True
-        except:
+        except TimeoutException:
             return False
 
     @allure.step("Перейти в раздел 'Отчеты'")
-    def go_to_reports(self):
+    def go_to_reports(self) -> None:
         reports_link = WebDriverWait(self.__driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//div[text()='Отчеты']"))
         )

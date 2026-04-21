@@ -2,15 +2,18 @@ import requests
 import allure
 from tenacity import retry, stop_after_attempt, wait_fixed
 
+
 class ProjectApi:
     """Класс для работы с проектами API Yougile"""
-    def __init__(self, base_url: str, headers: dict):
+    def __init__(self, base_url: str, headers: dict) -> None:
         self.base_url = base_url
         self.headers = headers
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))
     @allure.step("Создать проект с названием '{title}'")
     def create_project(self, title: str, users: dict = None, timeout: int = 60) -> dict:
+        if users is None:
+            users = {}
         payload = {"title": title}
         if users:
             payload["users"] = users
@@ -18,7 +21,7 @@ class ProjectApi:
             f"{self.base_url}/projects",
             json=payload,
             headers=self.headers,
-            timeout = timeout
+            timeout=timeout
         )
         return resp.json()
 
